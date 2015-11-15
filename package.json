@@ -1,0 +1,36 @@
+{
+  "name": "textlint-rule-sentence-length",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/azu/textlint-rule-sentence-length.git"
+  },
+  "author": "azu",
+  "email": "azuciao@gmail.com",
+  "homepage": "https://github.com/azu/textlint-rule-sentence-length",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/azu/textlint-rule-sentence-length/issues"
+  },
+  "version": "1.0.0",
+  "description": "textlint rule check sentence length",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "textlint",
+    "rule"
+  ],
+  "dependencies": {
+    "sentence-splitter": "^1.0.2"
+  },
+  "devDependencies": {
+    "espower-babel": "^4.0.0",
+    "mocha": "^2.3.3",
+    "power-assert": "^1.2.0",
+    "textlint-tester": "^0.4.0"
+  }
+}

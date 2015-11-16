@@ -8,6 +8,12 @@ tester.run("textlint-rule-sentence-length", rule, {
         "This is a article",
         "Test`code`です。",
         {
+            text: "> ignore",
+            options: {
+                max: 1
+            }
+        },
+        {
             // == 12345
             text: "12`3`45",
             options: {

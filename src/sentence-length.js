@@ -2,15 +2,20 @@
 "use strict";
 import sentenceSplitter from "sentence-splitter";
 import toString from 'mdast-util-to-string';
+import {RuleHelper} from "textlint-rule-helper";
 const defaultOptions = {
     max: 100
 };
 export default function (context, options = {}) {
     const maxLength = options.max || defaultOptions.max;
+    const helper = new RuleHelper(context);
     let { Syntax, RuleError, report } = context;
     // toPlainText
     return {
         [Syntax.Paragraph](node){
+            if (helper.isChildNode(node, [Syntax.BlockQuote])) {
+                return;
+            }
             let text = toString(node);
             // empty break line == split sentence
             let sentences = sentenceSplitter(text, {

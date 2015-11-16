@@ -28,7 +28,7 @@
     "rule"
   ],
   "dependencies": {
-    "nlcst-to-string": "^1.1.0",
+    "mdast-util-to-string": "^1.0.0",
     "sentence-splitter": "^1.2.0"
   },
   "devDependencies": {

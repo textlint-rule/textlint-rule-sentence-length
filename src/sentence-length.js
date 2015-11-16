@@ -1,7 +1,7 @@
 // LICENSE : MIT
 "use strict";
 import sentenceSplitter from "sentence-splitter";
-import toString from "nlcst-to-string"
+import toString from 'mdast-util-to-string';
 const defaultOptions = {
     max: 100
 };

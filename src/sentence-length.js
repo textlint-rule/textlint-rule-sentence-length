@@ -12,10 +12,12 @@ export default function (context, options = {}) {
     return {
         [Syntax.Paragraph](node){
             let text = toString(node);
+            // empty break line == split sentence
             let sentences = sentenceSplitter(text, {
                 newLineCharacters: "\n\n"
             });
             sentences.forEach(sentence => {
+                // TODO: should trim()?
                 let sentenceText = sentence.value;
                 // bigger than
                 if (sentenceText.length > maxLength) {

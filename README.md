@@ -4,9 +4,20 @@
 
 ## Installation
 
-- [ ] Describe the installation process
+    npm install textlint-rule-sentence-length
 
 ## Usage
+
+Add "sentence-length" to your `.textlintrc`.
+
+```
+{
+    "rules": {
+        "sentence-length": true
+    }
+}
+```
+
 
 ### Options
 
@@ -27,7 +38,7 @@
 
 ## Tests
 
-- [ ] Write How to Tests
+    npm test
 
 ## Contributing
 

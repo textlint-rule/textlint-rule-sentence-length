@@ -5,8 +5,8 @@ import TextLintTester from "textlint-tester";
 var tester = new TextLintTester();
 tester.run("textlint-rule-sentence-length", rule, {
     valid: [
-        "文章です",
-        "テスト`code`です。",
+        "This is a article",
+        "Test`code`です。",
         {
             // == 12345
             text: "12`3`45",

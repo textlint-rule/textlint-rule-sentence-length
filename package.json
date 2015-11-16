@@ -11,7 +11,7 @@
   "bugs": {
     "url": "https://github.com/azu/textlint-rule-sentence-length/issues"
   },
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "textlint rule check sentence length",
   "main": "lib/sentence-length.js",
   "directories": {
@@ -20,7 +20,7 @@
   "scripts": {
     "build": "babel src --out-dir lib --source-maps",
     "watch": "babel src --out-dir lib --watch --source-maps",
-    "prepublish":"npm run --if-present build",
+    "prepublish": "npm run --if-present build",
     "test": "mocha"
   },
   "keywords": [

@@ -36,6 +36,12 @@ Add "sentence-length" to your `.textlintrc`.
 }
 ```
 
+## Related Rules
+
+- [azu/textlint-rule-sentence-length: textlint rule that limit Maximum Length of Sentence.](https://github.com/azu/textlint-rule-sentence-length "azu/textlint-rule-sentence-length: textlint rule that limit Maximum Length of Sentence.")
+
+See [Other rules](https://github.com/textlint/textlint/wiki/Collection-of-textlint-rule)
+
 ## Tests
 
     npm test

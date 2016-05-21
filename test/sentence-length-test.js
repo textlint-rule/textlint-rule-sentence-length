@@ -80,7 +80,9 @@ line4
         },
         // example
         {
-            text: `_Middleware_ という仕組み自体は[Connect](../connect/README.md)と似ています。
+            text: `This is text.
+            
+_Middleware_ という仕組み自体は[Connect](../connect/README.md)と似ています。
 しかし、 _Middleware_ が直接的に結果(State)を直接書き換える事はできません。
 これは、Connectが最終的な結果(response)を書き換えできるの対して、
 Reduxの _Middleware_ は扱える範囲がdispatchからReducerまでと線引されている違いと言えます。`,
@@ -89,7 +91,7 @@ Reduxの _Middleware_ は扱える範囲がdispatchからReducerまでと線引�
             },
             errors: [
                 {
-                    message: `Line 3 exceeds the maximum line length of 100.`
+                    message: `Line 5 exceeds the maximum line length of 100.`
                 }
             ]
         }

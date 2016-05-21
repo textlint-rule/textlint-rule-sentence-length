@@ -31,7 +31,7 @@ export default function (context, options = {}) {
                 if (sentenceText.length > maxLength) {
                     let currentLine = node.loc.start.line;
                     const addedLine = isStartWithNewLine(sentenceText)
-                        ? sentence.loc.start.line // \n string
+                        ? sentence.loc.start.line + 1// \n string
                         : sentence.loc.start.line - 1; // string
                     let paddingLine = Math.max(addedLine, 0);
                     let paddingIndex = sentence.range[0];

@@ -3,6 +3,9 @@
 import {split} from "sentence-splitter";
 import toString from 'mdast-util-to-string';
 import {RuleHelper} from "textlint-rule-helper";
+const isStartWithNewLine = (text) => {
+    return text && text.charAt(0) === "\n";
+};
 const defaultOptions = {
     max: 100
 };
@@ -27,11 +30,13 @@ export default function (context, options = {}) {
                 // bigger than
                 if (sentenceText.length > maxLength) {
                     let currentLine = node.loc.start.line;
-                    let paddingLine = Math.max(sentence.loc.start.line - 1, 0);
-                    let paddingColumn = sentence.loc.start.column;
+                    const addedLine = isStartWithNewLine(sentenceText)
+                        ? sentence.loc.start.line // \n string
+                        : sentence.loc.start.line - 1; // string
+                    let paddingLine = Math.max(addedLine, 0);
+                    let paddingIndex = sentence.range[0];
                     report(node, new RuleError(`Line ${currentLine + paddingLine} exceeds the maximum line length of ${maxLength}.`, {
-                        line: paddingLine,
-                        column: paddingColumn
+                        index: paddingIndex
                     }));
                 }
             });

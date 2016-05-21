@@ -62,6 +62,21 @@ tester.run("textlint-rule-sentence-length", rule, {
                     message: `Line 3 exceeds the maximum line length of 5.`
                 }
             ]
+        },
+        {
+            text: `text
+
+line3
+line4
+`,
+            options: {
+                max: 5
+            },
+            errors: [
+                {
+                    message: `Line 3 exceeds the maximum line length of 5.`
+                }
+            ]
         }
     ]
 });

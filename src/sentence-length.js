@@ -19,7 +19,7 @@ export default function(context, options = {}) {
             if (helper.isChildNode(node, [Syntax.BlockQuote])) {
                 return;
             }
-            // If a single Link node in the paragraph node, should be ignore the link length.
+            // If a single Link node in the paragraph node, should be ignore the link length
             const isChildrenSingleLinkNode = node.children.length === 1 && node.children[0].type === Syntax.Link;
             if (isChildrenSingleLinkNode) {
                 return;
@@ -34,9 +34,9 @@ export default function(context, options = {}) {
                 let sentenceText = sentence.value;
                 // larger than > 100
                 if (sentenceText.length > maxLength) {
-                    let currentLine = node.loc.start.line;
+                    const currentLine = node.loc.start.line;
                     const addedLine = isStartWithNewLine(sentenceText)
-                        ? sentence.loc.start.line + 1  // \n string
+                        ? sentence.loc.start.line // \n string
                         : sentence.loc.start.line - 1; // string
                     let paddingLine = Math.max(addedLine, 0);
                     let paddingIndex = sentence.range[0];

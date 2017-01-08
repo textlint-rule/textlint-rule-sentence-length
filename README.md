@@ -45,7 +45,7 @@ Add "sentence-length" to your `.textlintrc`.
 **OK**:
 
 ```
-> LONG LONG LONG LONG LONG LONG LONG LONG Quote text
+> LONG LONG LONG LONG LONG LONG LONG LONG Quote text. But it is quote text.
 
 a single link node ↓
 

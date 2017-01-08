@@ -2,11 +2,13 @@
 "use strict";
 import rule from "../src/sentence-length";
 import TextLintTester from "textlint-tester";
-var tester = new TextLintTester();
+const tester = new TextLintTester();
 tester.run("textlint-rule-sentence-length", rule, {
     valid: [
         "This is a article",
         "Test`code`です。",
+        // Exception: A link in the Paragraph
+        "[textlint/textlint-filter-rule-comments: textlint filter rule that disables all rules between comments directive.](https://github.com/textlint/textlint-filter-rule-comments)",
         {
             text: "> ignore",
             options: {

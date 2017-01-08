@@ -9,29 +9,34 @@ const isStartWithNewLine = (text) => {
 const defaultOptions = {
     max: 100
 };
-export default function (context, options = {}) {
+export default function(context, options = {}) {
     const maxLength = options.max || defaultOptions.max;
     const helper = new RuleHelper(context);
-    let {Syntax, RuleError, report} = context;
+    const {Syntax, RuleError, report} = context;
     // toPlainText
     return {
         [Syntax.Paragraph](node){
             if (helper.isChildNode(node, [Syntax.BlockQuote])) {
                 return;
             }
-            let text = toString(node);
+            // If a single Link node in the paragraph node, should be ignore the link length.
+            const isChildrenSingleLinkNode = node.children.length === 1 && node.children[0].type === Syntax.Link;
+            if (isChildrenSingleLinkNode) {
+                return;
+            }
+            const text = toString(node);
             // empty break line == split sentence
-            let sentences = split(text, {
+            const sentences = split(text, {
                 newLineCharacters: "\n\n"
             });
             sentences.forEach(sentence => {
                 // TODO: should trim()?
                 let sentenceText = sentence.value;
-                // bigger than
+                // larger than > 100
                 if (sentenceText.length > maxLength) {
                     let currentLine = node.loc.start.line;
                     const addedLine = isStartWithNewLine(sentenceText)
-                        ? sentence.loc.start.line + 1// \n string
+                        ? sentence.loc.start.line + 1  // \n string
                         : sentence.loc.start.line - 1; // string
                     let paddingLine = Math.max(addedLine, 0);
                     let paddingIndex = sentence.range[0];

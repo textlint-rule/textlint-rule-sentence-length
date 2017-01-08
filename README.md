@@ -24,7 +24,7 @@ Add "sentence-length" to your `.textlintrc`.
 - `max`
     - default: 100
     - The total number of characters allowed on each sentences.
-    - => Sentence.length > 100 and throw Error
+    - Sentence.length > 100 and throw Error
 
 ```
 {
@@ -35,6 +35,35 @@ Add "sentence-length" to your `.textlintrc`.
     }
 }
 ```
+
+## Exception
+
+- Except BlockQuote
+- Except a single link node
+
+
+**OK**:
+
+```
+> LONG LONG LONG LONG LONG LONG LONG LONG Quote text
+
+a single link node ↓
+
+[textlint/textlint-filter-rule-comments: textlint filter rule that disables all rules between comments directive.](https://github.com/textlint/textlint-filter-rule-comments)
+
+a single link node ↓
+
+- [textlint/textlint-filter-rule-comments: textlint filter rule that disables all rules between comments directive.](https://github.com/textlint/textlint-filter-rule-comments)
+```
+
+**NG**:
+
+This sentence includes one link and two Str.
+
+```
+This is [textlint/textlint-filter-rule-comments: textlint filter rule that disables all rules between comments directive.](https://github.com/textlint/textlint-filter-rule-comments).
+```
+
 
 ## Related Rules
 

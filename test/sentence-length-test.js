@@ -25,7 +25,7 @@ tester.run("textlint-rule-sentence-length", rule, {
         },
         {
             // == 12345
-            text: "[123](http://example.com)45",
+            text: '[123](http://example.com "123456")45',
             options: {
                 max: 5
             }
@@ -94,7 +94,7 @@ Reduxの _Middleware_ は扱える範囲がdispatchからReducerまでと線引�
             },
             errors: [
                 {
-                    message: `Line 5 exceeds the maximum line length of 100.`
+                    message: `Line 4 exceeds the maximum line length of 100.`
                 }
             ]
         }

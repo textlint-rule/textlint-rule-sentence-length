@@ -1,21 +1,19 @@
 // LICENSE : MIT
 "use strict";
-import {split} from "sentence-splitter";
-import toString from 'mdast-util-to-string';
-import {RuleHelper} from "textlint-rule-helper";
-const isStartWithNewLine = (text) => {
-    return text && text.charAt(0) === "\n";
-};
+import { split } from "sentence-splitter";
+import StringSource from 'textlint-util-to-string';
+import { RuleHelper } from "textlint-rule-helper";
+
 const defaultOptions = {
     max: 100
 };
 export default function(context, options = {}) {
     const maxLength = options.max || defaultOptions.max;
     const helper = new RuleHelper(context);
-    const {Syntax, RuleError, report} = context;
+    const { Syntax, RuleError, report } = context;
     // toPlainText
     return {
-        [Syntax.Paragraph](node){
+        [Syntax.Paragraph](node) {
             if (helper.isChildNode(node, [Syntax.BlockQuote])) {
                 return;
             }
@@ -24,24 +22,23 @@ export default function(context, options = {}) {
             if (isChildrenSingleLinkNode) {
                 return;
             }
-            const text = toString(node);
+            const source = new StringSource(node);
+            const text = source.toString();
             // empty break line == split sentence
             const sentences = split(text, {
                 newLineCharacters: "\n\n"
             });
             sentences.forEach(sentence => {
                 // TODO: should trim()?
-                let sentenceText = sentence.value;
+                const sentenceText = sentence.value;
                 // larger than > 100
                 if (sentenceText.length > maxLength) {
                     const currentLine = node.loc.start.line;
-                    const addedLine = isStartWithNewLine(sentenceText)
-                        ? sentence.loc.start.line // \n string
-                        : sentence.loc.start.line - 1; // string
-                    let paddingLine = Math.max(addedLine, 0);
-                    let paddingIndex = sentence.range[0];
-                    report(node, new RuleError(`Line ${currentLine + paddingLine} exceeds the maximum line length of ${maxLength}.`, {
-                        index: paddingIndex
+                    const start = source.originalPositionFromPosition(sentence.loc.start);
+                    const startLine = start.line - 1 + currentLine;
+                    const index = source.originalIndexFromPosition(sentence.loc.start);
+                    report(node, new RuleError(`Line ${startLine} exceeds the maximum line length of ${maxLength}.`, {
+                        index: index
                     }));
                 }
             });

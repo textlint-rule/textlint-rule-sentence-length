@@ -2,6 +2,7 @@
 "use strict";
 import rule from "../src/sentence-length";
 import TextLintTester from "textlint-tester";
+
 const tester = new TextLintTester();
 tester.run("textlint-rule-sentence-length", rule, {
     valid: [
@@ -63,6 +64,19 @@ tester.run("textlint-rule-sentence-length", rule, {
             errors: [
                 {
                     message: `Line 3 exceeds the maximum line length of 5.`
+                }
+            ]
+        },
+        {
+            // test: https://github.com/azu/textlint-rule-sentence-length/issues/5
+            text:
+                `11111\n2222\n3333333`,
+            options: {
+                max: 5
+            },
+            errors: [
+                {
+                    message: `Line 1 exceeds the maximum line length of 5.`
                 }
             ]
         },

@@ -1,7 +1,7 @@
 // LICENSE : MIT
 "use strict";
-import rule from "../src/sentence-length";
 import TextLintTester from "textlint-tester";
+const rule = require("../src/sentence-length");
 
 const tester = new TextLintTester();
 tester.run("textlint-rule-sentence-length", rule, {

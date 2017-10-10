@@ -7,7 +7,7 @@ import { RuleHelper } from "textlint-rule-helper";
 const defaultOptions = {
     max: 100
 };
-export default function(context, options = {}) {
+module.exports = function(context, options = {}) {
     const maxLength = options.max || defaultOptions.max;
     const helper = new RuleHelper(context);
     const { Syntax, RuleError, report } = context;

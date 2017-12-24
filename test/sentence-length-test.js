@@ -1,6 +1,7 @@
 // LICENSE : MIT
 "use strict";
 import TextLintTester from "textlint-tester";
+
 const rule = require("../src/sentence-length");
 
 const tester = new TextLintTester();
@@ -8,6 +9,12 @@ tester.run("textlint-rule-sentence-length", rule, {
     valid: [
         "This is a article",
         "Test`code`です。",
+        {
+            text: '"This" is code.',
+            options: {
+                max: 15
+            }
+        },
         // Exception: A link in the Paragraph
         "[textlint/textlint-filter-rule-comments: textlint filter rule that disables all rules between comments directive.](https://github.com/textlint/textlint-filter-rule-comments)",
         "- [textlint/textlint-filter-rule-comments: textlint filter rule that disables all rules between comments directive.](https://github.com/textlint/textlint-filter-rule-comments)",
@@ -19,7 +26,7 @@ tester.run("textlint-rule-sentence-length", rule, {
         },
         {
             // == 12345
-            text: "12`3`45",
+            text: "ab`c`de",
             options: {
                 max: 5
             }
@@ -108,7 +115,9 @@ Reduxの _Middleware_ は扱える範囲がdispatchからReducerまでと線引�
             },
             errors: [
                 {
-                    message: `Line 4 exceeds the maximum line length of 100.`
+                    message: `Line 5 exceeds the maximum line length of 100.`,
+                    line: 5,
+                    column: 1
                 }
             ]
         }

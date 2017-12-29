@@ -37,6 +37,26 @@ tester.run("textlint-rule-sentence-length", rule, {
             options: {
                 max: 5
             }
+        },
+        {
+            // List
+            text: '- [abc](http://example.com "abc")de',
+            options: {
+                max: 5
+            }
+        },
+        {
+            // List
+            text: `
+- abcde
+- abcde
+- abcde
+- abcde
+- abcde
+`,
+            options: {
+                max: 5
+            }
         }
 
     ],

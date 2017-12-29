@@ -1,6 +1,6 @@
 // LICENSE : MIT
 "use strict";
-import { split } from "sentence-splitter";
+import { splitAST, Syntax as SentenceSyntax } from "sentence-splitter";
 import StringSource from 'textlint-util-to-string';
 import { RuleHelper } from "textlint-rule-helper";
 
@@ -22,26 +22,20 @@ module.exports = function(context, options = {}) {
             if (isChildrenSingleLinkNode) {
                 return;
             }
-            const source = new StringSource(node);
-            const text = source.toString();
             // empty break line == split sentence
-            const sentences = split(text, {
-                newLineCharacters: "\n\n"
-            });
-            sentences.forEach(sentence => {
-                // TODO: should trim()?
-                const sentenceText = sentence.value;
-                // larger than > 100
-                if (sentenceText.length > maxLength) {
-                    const currentLine = node.loc.start.line;
-                    const start = source.originalPositionFromPosition(sentence.loc.start);
-                    const startLine = start.line - 1 + currentLine;
-                    const index = source.originalIndexFromPosition(sentence.loc.start);
-                    report(node, new RuleError(`Line ${startLine} exceeds the maximum line length of ${maxLength}.`, {
-                        index: index
-                    }));
-                }
-            });
+            const paragraph = splitAST(node);
+            paragraph
+                .children
+                .filter(sentence => sentence.type === SentenceSyntax.Sentence)
+                .forEach(sentence => {
+                    const source = new StringSource(sentence);
+                    const sentenceText = source.toString();
+                    // larger than > 100
+                    if (sentenceText.length > maxLength) {
+                        const startLine = sentence.loc.start.line;
+                        report(sentence, new RuleError(`Line ${startLine} exceeds the maximum line length of ${maxLength}.`));
+                    }
+                });
         }
     }
-}
+};

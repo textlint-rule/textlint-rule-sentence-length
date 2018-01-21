@@ -58,7 +58,6 @@ tester.run("textlint-rule-sentence-length", rule, {
                 max: 5
             }
         }
-
     ],
     invalid: [
         {
@@ -96,8 +95,7 @@ tester.run("textlint-rule-sentence-length", rule, {
         },
         {
             // test: https://github.com/azu/textlint-rule-sentence-length/issues/5
-            text:
-                `11111\n2222\n3333333`,
+            text: `11111\n2222\n3333333`,
             options: {
                 max: 5
             },

@@ -3,8 +3,10 @@
 import TextLintTester from "textlint-tester";
 
 const rule = require("../src/sentence-length");
+const htmlPlugin = require("textlint-plugin-html");
 
 const tester = new TextLintTester();
+
 tester.run("textlint-rule-sentence-length", rule, {
     valid: [
         "This is a article",
@@ -141,3 +143,45 @@ Reduxの _Middleware_ は扱える範囲がdispatchからReducerまでと線引�
         }
     ]
 });
+
+tester.run(
+    "textlint-rule-sentence-length:plugin",
+    {
+        plugins: [
+            {
+                pluginId: "html",
+                plugin: htmlPlugin
+            }
+        ],
+        rules: [
+            {
+                ruleId: "textlint-rule-sentence-length",
+                rule: rule,
+                options: {
+                    max: 15
+                }
+            }
+        ]
+    },
+    {
+        valid: [
+            {
+                text: "<p>this is a test.</p>",
+                ext: ".html"
+            }
+        ],
+        invalid: [
+            {
+                text: "<p>this is a test for textlint-rule-sentence-length with plugin</p>",
+                ext: ".html",
+                errors: [
+                    {
+                        message: `Line 1 exceeds the maximum line length of 15.`,
+                        line: 1,
+                        column: 4
+                    }
+                ]
+            }
+        ]
+    }
+);

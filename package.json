@@ -28,7 +28,8 @@
     "build": "textlint-scripts build",
     "prepublish": "npm run --if-present build",
     "test": "textlint-scripts test",
-    "watch": "textlint-scripts build --watch"
+    "watch": "textlint-scripts build --watch",
+    "prettier": "prettier --write **/*.js"
   },
   "dependencies": {
     "sentence-splitter": "^3.0.7",
@@ -46,8 +47,9 @@
   "email": "azuciao@gmail.com",
   "lint-staged": {
     "*.{js,jsx,ts,tsx,css}": [
+      "git stash --keep-index",
       "prettier --write",
-      "git add"
+      "git stash pop"
     ]
   },
   "prettier": {

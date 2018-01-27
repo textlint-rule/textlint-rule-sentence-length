@@ -1,45 +1,60 @@
 {
   "name": "textlint-rule-sentence-length",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/azu/textlint-rule-sentence-length.git"
-  },
-  "author": "azu",
-  "email": "azuciao@gmail.com",
+  "version": "2.0.0",
+  "description": "textlint rule check sentence length",
+  "keywords": [
+    "rule",
+    "textlint"
+  ],
   "homepage": "https://github.com/azu/textlint-rule-sentence-length",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/azu/textlint-rule-sentence-length/issues"
   },
-  "version": "2.0.0",
-  "description": "textlint rule check sentence length",
-  "main": "lib/sentence-length.js",
+  "license": "MIT",
+  "author": "azu",
   "files": [
     "lib",
     "src"
   ],
+  "main": "lib/sentence-length.js",
   "directories": {
     "test": "test"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/azu/textlint-rule-sentence-length.git"
+  },
   "scripts": {
     "build": "textlint-scripts build",
-    "watch": "textlint-scripts build --watch",
     "prepublish": "npm run --if-present build",
-    "test": "textlint-scripts test"
+    "test": "textlint-scripts test",
+    "watch": "textlint-scripts build --watch",
+    "prettier": "prettier --write **/*.js"
   },
-  "keywords": [
-    "textlint",
-    "rule"
-  ],
   "dependencies": {
-    "sentence-splitter": "^3.0.6",
+    "sentence-splitter": "^3.0.7",
     "textlint-rule-helper": "^2.0.0",
     "textlint-util-to-string": "^2.1.1"
   },
   "devDependencies": {
     "babel-plugin-add-module-exports": "^0.2.1",
     "espower-babel": "^4.0.0",
+    "lint-staged": "^6.0.1",
     "power-assert": "^1.2.0",
-    "textlint-scripts": "^1.4.0"
+    "prettier": "^1.10.2",
+    "textlint-plugin-html": "^0.1.7",
+    "textlint-scripts": "^1.4.2"
+  },
+  "email": "azuciao@gmail.com",
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,css}": [
+      "git stash --keep-index",
+      "prettier --write",
+      "git stash pop"
+    ]
+  },
+  "prettier": {
+    "printWidth": 120,
+    "tabWidth": 4
   }
 }

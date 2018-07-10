@@ -1,6 +1,6 @@
 {
   "name": "textlint-rule-sentence-length",
-  "version": "2.0.3",
+  "version": "2.1.0",
   "description": "textlint rule check sentence length",
   "keywords": [
     "rule",

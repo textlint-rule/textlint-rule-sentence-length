@@ -3419,9 +3419,9 @@ sentence-case@^1.1.2:
   dependencies:
     lower-case "^1.1.1"
 
-sentence-splitter@^3.0.9:
-  version "3.0.9"
-  resolved "https://registry.yarnpkg.com/sentence-splitter/-/sentence-splitter-3.0.9.tgz#491060c087ae136b5dfda1c3e757c2ab44db5138"
+sentence-splitter@^3.0.10:
+  version "3.0.10"
+  resolved "https://registry.yarnpkg.com/sentence-splitter/-/sentence-splitter-3.0.10.tgz#9883d46be71cd6c6d826490133651fe2f151219d"
   dependencies:
     "@textlint/ast-node-types" "^4.0.2"
     concat-stream "^1.5.2"

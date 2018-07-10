@@ -32,7 +32,7 @@
     "prettier": "prettier --write **/*.js"
   },
   "dependencies": {
-    "sentence-splitter": "^3.0.9",
+    "sentence-splitter": "^3.0.10",
     "textlint-rule-helper": "^2.0.0",
     "textlint-util-to-string": "^2.1.1"
   },

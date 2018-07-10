@@ -67,6 +67,12 @@ tester.run("textlint-rule-sentence-length", rule, {
             options: {
                 max: 90
             }
+        },
+        {
+            text: `また*CORS policy Invalid*のようなエラーがコンソールに表示されている場合は、[Same Origin Policy][]により\`index.js\`の読み込みが失敗しています。`,
+            options: {
+                max: 90
+            }
         }
     ],
     invalid: [
@@ -77,7 +83,8 @@ tester.run("textlint-rule-sentence-length", rule, {
             },
             errors: [
                 {
-                    message: `Line 1 exceeds the maximum line length of 5.`
+                    message: `Line 1 sentence length(6) exceeds the maximum sentence length of 5.
+Over 1 characters.`
                 }
             ]
         },
@@ -88,7 +95,8 @@ tester.run("textlint-rule-sentence-length", rule, {
             },
             errors: [
                 {
-                    message: `Line 1 exceeds the maximum line length of 5.`
+                    message: `Line 1 sentence length(6) exceeds the maximum sentence length of 5.
+Over 1 characters.`
                 }
             ]
         },
@@ -99,7 +107,8 @@ tester.run("textlint-rule-sentence-length", rule, {
             },
             errors: [
                 {
-                    message: `Line 3 exceeds the maximum line length of 5.`
+                    message: `Line 3 sentence length(6) exceeds the maximum sentence length of 5.
+Over 1 characters.`
                 }
             ]
         },
@@ -111,7 +120,8 @@ tester.run("textlint-rule-sentence-length", rule, {
             },
             errors: [
                 {
-                    message: `Line 1 exceeds the maximum line length of 5.`,
+                    message: `Line 1 sentence length(18) exceeds the maximum sentence length of 5.
+Over 13 characters.`,
                 }
             ]
         },
@@ -123,7 +133,8 @@ tester.run("textlint-rule-sentence-length", rule, {
             },
             errors: [
                 {
-                    message: `Line 4 exceeds the maximum line length of 10.`,
+                    message: `Line 4 sentence length(11) exceeds the maximum sentence length of 10.
+Over 1 characters.`,
                     line: 4,
                     column: 1
                 }
@@ -140,7 +151,8 @@ line4
             },
             errors: [
                 {
-                    message: `Line 3 exceeds the maximum line length of 5.`
+                    message: `Line 3 sentence length(11) exceeds the maximum sentence length of 5.
+Over 6 characters.`
                 }
             ]
         },
@@ -157,7 +169,8 @@ Reduxの _Middleware_ は扱える範囲がdispatchからReducerまでと線引�
             },
             errors: [
                 {
-                    message: `Line 5 exceeds the maximum line length of 100.`,
+                    message: `Line 5 sentence length(102) exceeds the maximum sentence length of 100.
+Over 2 characters.`,
                     line: 5,
                     column: 1
                 }
@@ -198,7 +211,8 @@ tester.run(
                 ext: ".html",
                 errors: [
                     {
-                        message: `Line 1 exceeds the maximum line length of 15.`,
+                        message: `Line 1 sentence length(60) exceeds the maximum sentence length of 15.
+Over 45 characters.`,
                         line: 1,
                         column: 4
                     }

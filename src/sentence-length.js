@@ -28,11 +28,13 @@ module.exports = function(context, options = {}) {
                 const source = new StringSource(sentence);
                 const sentenceText = source.toString();
                 // larger than > 100
-                if (sentenceText.length > maxLength) {
+                const sentenceLength = sentenceText.length;
+                if (sentenceLength > maxLength) {
                     const startLine = sentence.loc.start.line;
                     report(
                         sentence,
-                        new RuleError(`Line ${startLine} exceeds the maximum line length of ${maxLength}.`)
+                        new RuleError(`Line ${startLine} sentence length(${sentenceLength}) exceeds the maximum sentence length of ${maxLength}.
+Over ${sentenceLength - maxLength} characters.`)
                     );
                 }
             });

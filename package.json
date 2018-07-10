@@ -6,9 +6,9 @@
     "rule",
     "textlint"
   ],
-  "homepage": "https://github.com/azu/textlint-rule-sentence-length",
+  "homepage": "https://github.com/textlint-rule/textlint-rule-sentence-length",
   "bugs": {
-    "url": "https://github.com/azu/textlint-rule-sentence-length/issues"
+    "url": "https://github.com/textlint-rule/textlint-rule-sentence-length/issues"
   },
   "license": "MIT",
   "author": "azu",
@@ -22,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/azu/textlint-rule-sentence-length.git"
+    "url": "git+https://github.com/textlint-rule/textlint-rule-sentence-length.git"
   },
   "scripts": {
     "build": "textlint-scripts build",

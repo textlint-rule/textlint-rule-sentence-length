@@ -1,4 +1,4 @@
-# textlint-rule-sentence-length [![Build Status](https://travis-ci.org/azu/textlint-rule-sentence-length.svg?branch=master)](https://travis-ci.org/azu/textlint-rule-sentence-length)
+# textlint-rule-sentence-length [![Build Status](https://travis-ci.org/textlint-rule/textlint-rule-sentence-length.svg?branch=master)](https://travis-ci.org/textlint-rule/textlint-rule-sentence-length)
 
 [textlint](https://github.com/textlint/textlint "textlint") rule that limit Maximum Length of Sentence.
 

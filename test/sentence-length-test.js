@@ -59,6 +59,14 @@ tester.run("textlint-rule-sentence-length", rule, {
             options: {
                 max: 5
             }
+        },
+        {
+            text: `実行コンテキストが"Script"である場合、そのコード直下に書かれた\`this\`はグローバルオブジェクトを参照します。
+グローバルオブジェクトとは、実行環境において異なるものが定義されています。
+ブラウザなら\`window\`オブジェクト、Node.jsなら\`global\`オブジェクトとなります。`,
+            options: {
+                max: 90
+            }
         }
     ],
     invalid: [
@@ -103,7 +111,21 @@ tester.run("textlint-rule-sentence-length", rule, {
             },
             errors: [
                 {
-                    message: `Line 1 exceeds the maximum line length of 5.`
+                    message: `Line 1 exceeds the maximum line length of 5.`,
+                }
+            ]
+        },
+        {
+            // test: https://github.com/azu/textlint-rule-sentence-length/issues/5
+            text: `あいうえお。\n\nあいうえお。\nあいうえおあかさたな。`,
+            options: {
+                max: 10
+            },
+            errors: [
+                {
+                    message: `Line 4 exceeds the maximum line length of 10.`,
+                    line: 4,
+                    column: 1
                 }
             ]
         },

@@ -1,7 +1,7 @@
 // LICENSE : MIT
 "use strict";
 import { splitAST, Syntax as SentenceSyntax } from "sentence-splitter";
-import StringSource from "textlint-util-to-string";
+import { StringSource } from "textlint-util-to-string";
 import { RuleHelper } from "textlint-rule-helper";
 
 const defaultOptions = {

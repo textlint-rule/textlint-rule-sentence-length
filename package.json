@@ -32,18 +32,15 @@
     "prettier": "prettier --write **/*.js"
   },
   "dependencies": {
-    "sentence-splitter": "^3.0.10",
-    "textlint-rule-helper": "^2.0.0",
-    "textlint-util-to-string": "^2.1.1"
+    "sentence-splitter": "^3.0.11",
+    "textlint-rule-helper": "^2.1.1",
+    "textlint-util-to-string": "^3.0.0"
   },
   "devDependencies": {
-    "babel-plugin-add-module-exports": "^0.2.1",
-    "espower-babel": "^4.0.0",
-    "lint-staged": "^7.2.0",
-    "power-assert": "^1.6.0",
-    "prettier": "^1.13.7",
-    "textlint-plugin-html": "^0.1.7",
-    "textlint-scripts": "^1.4.2"
+    "lint-staged": "^9.2.5",
+    "prettier": "^1.18.2",
+    "textlint-plugin-html": "^0.2.0",
+    "textlint-scripts": "^2.1.0"
   },
   "email": "azuciao@gmail.com",
   "lint-staged": {

@@ -41,6 +41,14 @@ tester.run("textlint-rule-sentence-length", rule, {
             }
         },
         {
+            // html node
+            // == 12345
+            text: '<s>123</s><b>45</b>',
+            options: {
+                max: 5
+            }
+        },
+        {
             // List
             text: '- [abc](http://example.com "abc")de',
             options: {
@@ -73,6 +81,13 @@ tester.run("textlint-rule-sentence-length", rule, {
             options: {
                 max: 90
             }
+        },
+        // regression test
+        // https://github.com/textlint-rule/textlint-rule-sentence-length/issues/13
+        {
+            text: "ではみなさんは、そういうふうに川だと云いわれたり、乳の流れたあとだと云われたりしていたこのぼんやりと白いものがほんとうは何かご承知ですか。\n" +
+                "\n" +
+                "ではみなさんは、そういうふうに川だと云いわれたり、乳の流れたあとだと云われたりしていたこの<a href=\"https://www.aozora.gr.jp/cards/000081/files/456_15050.html\" target=\"_blank\" rel=\"noopener noreferrer\">ぼんやりと白いもの</a>がほんとうは何かご承知ですか。\n"
         }
     ],
     invalid: [

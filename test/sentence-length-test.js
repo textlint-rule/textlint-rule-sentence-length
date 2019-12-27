@@ -12,7 +12,7 @@ tester.run("textlint-rule-sentence-length", rule, {
         "This is a article",
         "Test`code`です。",
         {
-            text: '"This" is code.',
+            text: "\"This\" is code.",
             options: {
                 max: 15
             }
@@ -35,22 +35,32 @@ tester.run("textlint-rule-sentence-length", rule, {
         },
         {
             // == 12345
-            text: '[123](http://example.com "123456")45',
+            text: "[123](http://example.com \"123456\")45",
             options: {
                 max: 5
             }
         },
         {
+            // ignore /()$/。
+            text: "1234(56789)",
+            options: {
+                max: 5,
+                exclusionPatterns: [
+                    "/\\(.*\\)$/"
+                ]
+            }
+        },
+        {
             // html node
             // == 12345
-            text: '<s>123</s><b>45</b>',
+            text: "<s>123</s><b>45</b>",
             options: {
                 max: 5
             }
         },
         {
             // List
-            text: '- [abc](http://example.com "abc")de',
+            text: "- [abc](http://example.com \"abc\")de",
             options: {
                 max: 5
             }
@@ -136,7 +146,7 @@ Over 1 characters.`
             errors: [
                 {
                     message: `Line 1 sentence length(18) exceeds the maximum sentence length of 5.
-Over 13 characters.`,
+Over 13 characters.`
                 }
             ]
         },
@@ -190,6 +200,20 @@ Over 2 characters.`,
                     column: 1
                 }
             ]
+        },
+        {
+            // ignore /()$/。
+            text: "123456789(56789)",
+            options: {
+                max: 5,
+                exclusionPatterns: [
+                    "/\\(.*\\)$/"
+                ]
+            },
+            errors: [{
+                message: "Line 1 sentence length(9, original:16) exceeds the maximum sentence length of 5.\n" +
+                    "Over 4 characters."
+            }]
         }
     ]
 });

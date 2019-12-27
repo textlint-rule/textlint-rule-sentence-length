@@ -25,12 +25,32 @@ Add "sentence-length" to your `.textlintrc`.
     - default: 100
     - The total number of characters allowed on each sentences.
     - Sentence.length > 100 and throw Error
+- `exclusionPatterns`: `string[]`
+    - A strings that match the patterns is uncount of the sentence.
+    - Set an array of RegExp-like string.
+    - See https://github.com/textlint/regexp-string-matcher
 
 ```
 {
     "rules": {
         "sentence-length": {
             "max": 100
+        }
+    }
+}
+```
+
+Uncount `(...)` from `A sentence(...).`
+
+```
+{
+    "rules": {
+        "sentence-length": {
+            "max": 100,
+            exclusionPatterns: [
+                "/\\(.*\\)$\\./"
+            ]
+
         }
     }
 }

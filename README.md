@@ -47,7 +47,7 @@ Uncount `(...)` from `A sentence(...).`
     "rules": {
         "sentence-length": {
             "max": 100,
-            exclusionPatterns: [
+            "exclusionPatterns": [
                 "/\\(.*\\)$\\./"
             ]
 

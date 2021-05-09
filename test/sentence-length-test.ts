@@ -2,6 +2,7 @@ import TextLintTester from "textlint-tester";
 import rule from "../src/sentence-length";
 // @ts-expect-error: no types
 import htmlPlugin from "textlint-plugin-html";
+
 const tester = new TextLintTester();
 
 tester.run("textlint-rule-sentence-length", rule, {
@@ -42,13 +43,20 @@ tester.run("textlint-rule-sentence-length", rule, {
             text: "1234(56789)",
             options: {
                 max: 5,
-                exclusionPatterns: ["/\\(.*\\)$/"]
+                skipPatterns: ["/\\(.*\\)$/"]
             }
         },
         {
             // html node
             // == 12345
             text: "<s>123</s><b>45</b>",
+            options: {
+                max: 5
+            }
+        },
+        {
+            // url string link
+            text: "[http://example.com](http://example.com)",
             options: {
                 max: 5
             }
@@ -202,7 +210,7 @@ Over 2 characters.`,
             text: "123456789(56789)",
             options: {
                 max: 5,
-                exclusionPatterns: ["/\\(.*\\)$/"]
+                skipPatterns: ["/\\(.*\\)$/"]
             },
             errors: [
                 {
@@ -211,6 +219,20 @@ Over 2 characters.`,
                         "Over 4 characters."
                 }
             ]
+        },
+        {
+            // url string link
+            text: "TEST [http://example.com](http://example.com)",
+            errors: [
+                {
+                    message: `Line 1 sentence length(23) exceeds the maximum sentence length of 5.
+Over 18 characters.`
+                }
+            ],
+            options: {
+                max: 5,
+                skipUrlStringLink: false
+            }
         }
     ]
 });
@@ -238,6 +260,10 @@ tester.run(
         valid: [
             {
                 text: "<p>this is a test.</p>",
+                ext: ".html"
+            },
+            {
+                text: "<p>TEST is <a href='https://example.com'>https://example.com</a></p>",
                 ext: ".html"
             }
         ],

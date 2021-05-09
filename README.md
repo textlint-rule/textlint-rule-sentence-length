@@ -25,10 +25,14 @@ Add "sentence-length" to your `.textlintrc`.
     - default: 100
     - The total number of characters allowed on each sentences.
     - Sentence.length > 100 and throw Error
-- `exclusionPatterns`: `string[]`
+- `skipPatterns`: `string[]`
     - A strings that match the patterns is uncount of the sentence.
     - Set an array of RegExp-like string.
     - See https://github.com/textlint/regexp-string-matcher
+- `skipUrlStringLink`: `boolean`
+    - Default: `true`
+    - If it is `true`, skip url string link node like `<https:example.com>` or [https://example.com](https://example.com)
+    - url string link is has the text which is same of url.
 
 ```
 {
@@ -47,7 +51,7 @@ Uncount `(...)` from `A sentence(...).`
     "rules": {
         "sentence-length": {
             "max": 100,
-            "exclusionPatterns": [
+            "skipPattern": [
                 "/\\(.*\\)$\\./"
             ]
 

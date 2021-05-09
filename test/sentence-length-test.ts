@@ -1,10 +1,7 @@
-// LICENSE : MIT
-"use strict";
 import TextLintTester from "textlint-tester";
-
-const rule = require("../src/sentence-length");
-const htmlPlugin = require("textlint-plugin-html");
-
+import rule from "../src/sentence-length";
+// @ts-expect-error: no types
+import htmlPlugin from "textlint-plugin-html";
 const tester = new TextLintTester();
 
 tester.run("textlint-rule-sentence-length", rule, {
@@ -12,7 +9,7 @@ tester.run("textlint-rule-sentence-length", rule, {
         "This is a article",
         "Test`code`です。",
         {
-            text: "\"This\" is code.",
+            text: '"This" is code.',
             options: {
                 max: 15
             }
@@ -35,7 +32,7 @@ tester.run("textlint-rule-sentence-length", rule, {
         },
         {
             // == 12345
-            text: "[123](http://example.com \"123456\")45",
+            text: '[123](http://example.com "123456")45',
             options: {
                 max: 5
             }
@@ -45,9 +42,7 @@ tester.run("textlint-rule-sentence-length", rule, {
             text: "1234(56789)",
             options: {
                 max: 5,
-                exclusionPatterns: [
-                    "/\\(.*\\)$/"
-                ]
+                exclusionPatterns: ["/\\(.*\\)$/"]
             }
         },
         {
@@ -60,7 +55,7 @@ tester.run("textlint-rule-sentence-length", rule, {
         },
         {
             // List
-            text: "- [abc](http://example.com \"abc\")de",
+            text: '- [abc](http://example.com "abc")de',
             options: {
                 max: 5
             }
@@ -95,9 +90,10 @@ tester.run("textlint-rule-sentence-length", rule, {
         // regression test
         // https://github.com/textlint-rule/textlint-rule-sentence-length/issues/13
         {
-            text: "ではみなさんは、そういうふうに川だと云いわれたり、乳の流れたあとだと云われたりしていたこのぼんやりと白いものがほんとうは何かご承知ですか。\n" +
+            text:
+                "ではみなさんは、そういうふうに川だと云いわれたり、乳の流れたあとだと云われたりしていたこのぼんやりと白いものがほんとうは何かご承知ですか。\n" +
                 "\n" +
-                "ではみなさんは、そういうふうに川だと云いわれたり、乳の流れたあとだと云われたりしていたこの<a href=\"https://www.aozora.gr.jp/cards/000081/files/456_15050.html\" target=\"_blank\" rel=\"noopener noreferrer\">ぼんやりと白いもの</a>がほんとうは何かご承知ですか。\n"
+                'ではみなさんは、そういうふうに川だと云いわれたり、乳の流れたあとだと云われたりしていたこの<a href="https://www.aozora.gr.jp/cards/000081/files/456_15050.html" target="_blank" rel="noopener noreferrer">ぼんやりと白いもの</a>がほんとうは何かご承知ですか。\n'
         }
     ],
     invalid: [
@@ -206,14 +202,15 @@ Over 2 characters.`,
             text: "123456789(56789)",
             options: {
                 max: 5,
-                exclusionPatterns: [
-                    "/\\(.*\\)$/"
-                ]
+                exclusionPatterns: ["/\\(.*\\)$/"]
             },
-            errors: [{
-                message: "Line 1 sentence length(9, original:16) exceeds the maximum sentence length of 5.\n" +
-                    "Over 4 characters."
-            }]
+            errors: [
+                {
+                    message:
+                        "Line 1 sentence length(9, original:16) exceeds the maximum sentence length of 5.\n" +
+                        "Over 4 characters."
+                }
+            ]
         }
     ]
 });

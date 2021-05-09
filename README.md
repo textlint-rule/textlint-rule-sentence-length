@@ -31,7 +31,7 @@ Add "sentence-length" to your `.textlintrc`.
     - See https://github.com/textlint/regexp-string-matcher
 - `skipUrlStringLink`: `boolean`
     - Default: `true`
-    - If it is `true`, skip url string link node like `<https:example.com>` or [https://example.com](https://example.com)
+    - If it is `true`, skip url string link node like `<https:example.com>` or `[https://example.com](https://example.com)`
     - url string link is has the text which is same of url.
 
 ```

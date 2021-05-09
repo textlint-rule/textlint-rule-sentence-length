@@ -15,15 +15,20 @@ function removeRangeFromString(text: string, regExpStrings: string[]) {
     return result;
 }
 
-const defaultOptions = {
+export type Options = {
+    max?: number;
+    exclusionPatterns?: string[];
+};
+const defaultOptions: Required<Options> = {
     max: 100,
     // The strings that match following patterns is uncount of the sentence
     // See https://github.com/textlint/regexp-string-matcher
     exclusionPatterns: []
 };
-const reporter: TextlintRuleReporter = (context, options = {}) => {
-    const maxLength = options.max || defaultOptions.max;
-    const exclusionPatterns = options.exclusionPatterns || defaultOptions.exclusionPatterns;
+
+const reporter: TextlintRuleReporter<Options> = (context, options = {}) => {
+    const maxLength = options.max ?? defaultOptions.max;
+    const exclusionPatterns = options.exclusionPatterns ?? defaultOptions.exclusionPatterns;
     const helper = new RuleHelper(context);
     const { Syntax, RuleError, report } = context;
     // toPlainText

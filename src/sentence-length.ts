@@ -49,7 +49,7 @@ const defaultOptions: Required<Options> = {
 
 const reporter: TextlintRuleReporter<Options> = (context, options = {}) => {
     const maxLength = options.max ?? defaultOptions.max;
-    const skipPattern = options.skipPatterns ?? options.exclusionPatterns ?? defaultOptions.skipPatterns;
+    const skipPatterns = options.skipPatterns ?? options.exclusionPatterns ?? defaultOptions.skipPatterns;
     const skipUrlStringLink = options.skipUrlStringLink ?? defaultOptions.skipUrlStringLink;
     const helper = new RuleHelper(context);
     const { Syntax, RuleError, report } = context;
@@ -89,7 +89,7 @@ const reporter: TextlintRuleReporter<Options> = (context, options = {}) => {
                     // @ts-expect-error: wrong types
                     const source = new StringSource(filteredSentence);
                     const actualText = source.toString();
-                    const sentenceText = removeRangeFromString(actualText, skipPattern);
+                    const sentenceText = removeRangeFromString(actualText, skipPatterns);
                     // larger than > 100
                     const actualTextLength = actualText.length;
                     const sentenceLength = sentenceText.length;

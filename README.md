@@ -51,7 +51,7 @@ Uncount `(...)` from `A sentence(...).`
     "rules": {
         "sentence-length": {
             "max": 100,
-            "skipPattern": [
+            "skipPatterns": [
                 "/\\(.*\\)$\\./"
             ]
 
@@ -64,7 +64,7 @@ Uncount `(...)` from `A sentence(...).`
 
 - Except BlockQuote
 - Except a single link node
-
+- Except url string link (`skipUrlStringLink`)
 
 **OK**:
 
@@ -75,9 +75,8 @@ a single link node ↓
 
 [textlint/textlint-filter-rule-comments: textlint filter rule that disables all rules between comments directive.](https://github.com/textlint/textlint-filter-rule-comments)
 
-a single link node ↓
+Very long https://example.com?longlonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglonglong url.
 
-- [textlint/textlint-filter-rule-comments: textlint filter rule that disables all rules between comments directive.](https://github.com/textlint/textlint-filter-rule-comments)
 ```
 
 **NG**:

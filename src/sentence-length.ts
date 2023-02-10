@@ -1,9 +1,9 @@
+import type { TextlintRuleReporter } from "@textlint/types";
+import type { TxtNode, TxtParentNode } from "@textlint/ast-node-types";
 import { splitAST, SentenceSplitterSyntax } from "sentence-splitter";
 import { StringSource } from "textlint-util-to-string";
 import { RuleHelper } from "textlint-rule-helper";
 import { createRegExp } from "@textlint/regexp-string-matcher";
-import { TextlintRuleReporter } from "@textlint/types";
-import { TxtNode, TxtParentNode } from "@textlint/ast-node-types";
 
 function removeRangeFromString(text: string, regExpStrings: string[]) {
     const patterns = regExpStrings.map((pattern) => {

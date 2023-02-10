@@ -1,4 +1,4 @@
-import { splitAST, Syntax as SentenceSyntax } from "sentence-splitter";
+import { splitAST, SentenceSplitterSyntax } from "sentence-splitter";
 import { StringSource } from "textlint-util-to-string";
 import { RuleHelper } from "textlint-rule-helper";
 import { createRegExp } from "@textlint/regexp-string-matcher";
@@ -74,9 +74,9 @@ const reporter: TextlintRuleReporter<Options> = (context, options = {}) => {
                 return;
             }
             // empty break line == split sentence
-            const paragraph = splitAST(node);
-            paragraph.children
-                .filter((sentence) => sentence.type === SentenceSyntax.Sentence)
+            const sentenceRootNode = splitAST(node);
+            sentenceRootNode.children
+                .filter((sentence) => sentence.type === SentenceSplitterSyntax.Sentence)
                 .forEach((sentence) => {
                     const filteredSentence = skipUrlStringLink
                         ? {
@@ -86,8 +86,7 @@ const reporter: TextlintRuleReporter<Options> = (context, options = {}) => {
                               })
                           }
                         : sentence;
-                    // @ts-expect-error: wrong types
-                    const source = new StringSource(filteredSentence);
+                    const source = new StringSource(filteredSentence as TxtParentNode);
                     const actualText = source.toString();
                     const sentenceText = removeRangeFromString(actualText, skipPatterns);
                     // larger than > 100
@@ -96,6 +95,7 @@ const reporter: TextlintRuleReporter<Options> = (context, options = {}) => {
                     if (sentenceLength > maxLength) {
                         const startLine = filteredSentence.loc.start.line;
                         report(
+                            // @ts-expect-error: It is compatible with textlint node
                             filteredSentence,
                             new RuleError(`Line ${startLine} sentence length(${
                                 sentenceLength !== actualTextLength

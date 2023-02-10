@@ -90,7 +90,9 @@ tester.run("textlint-rule-sentence-length", rule, {
             }
         },
         {
-            text: `また*CORS policy Invalid*のようなエラーがコンソールに表示されている場合は、[Same Origin Policy][]により\`index.js\`の読み込みが失敗しています。`,
+            text: `また*CORS policy Invalid*のようなエラーがコンソールに表示されている場合は、[Same Origin Policy][]により\`index.js\`の読み込みが失敗しています。
+
+[Same Origin Policy]: https://example.com/`,
             options: {
                 max: 90
             }

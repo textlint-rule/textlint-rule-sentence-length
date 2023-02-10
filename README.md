@@ -26,7 +26,7 @@ Add "sentence-length" to your `.textlintrc`.
     - The total number of characters allowed on each sentences.
     - Sentence.length > 100 and throw Error
 - `skipPatterns`: `string[]`
-    - A strings that match the patterns is uncount of the sentence.
+    - A strings that match the patterns is uncounted of the sentence.
     - Set an array of RegExp-like string.
     - See https://github.com/textlint/regexp-string-matcher
 - `skipUrlStringLink`: `boolean`

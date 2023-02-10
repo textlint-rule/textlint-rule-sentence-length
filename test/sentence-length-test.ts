@@ -102,6 +102,11 @@ tester.run("textlint-rule-sentence-length", rule, {
                 "ではみなさんは、そういうふうに川だと云いわれたり、乳の流れたあとだと云われたりしていたこのぼんやりと白いものがほんとうは何かご承知ですか。\n" +
                 "\n" +
                 'ではみなさんは、そういうふうに川だと云いわれたり、乳の流れたあとだと云われたりしていたこの<a href="https://www.aozora.gr.jp/cards/000081/files/456_15050.html" target="_blank" rel="noopener noreferrer">ぼんやりと白いもの</a>がほんとうは何かご承知ですか。\n'
+        },
+        {
+            text: `JavaScriptをWasmにして実行する仕組みについて。
+QuickJSを使いJavaScriptをByteCodeにしたxxxxを作成し、\`QuickJS.wasm\`と動的にリンクして大部分を共有している。
+Shopify Functionで利用されるが、非同期処理の制限や5ms未満での実行制限がある。`
         }
     ],
     invalid: [

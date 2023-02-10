@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "@textlint/regexp-string-matcher": "^1.1.0",
-    "sentence-splitter": "^3.2.1",
+    "sentence-splitter": "^3.2.3",
     "textlint-rule-helper": "^2.1.1",
     "textlint-util-to-string": "^3.1.1"
   },

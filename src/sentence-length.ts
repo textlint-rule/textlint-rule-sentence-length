@@ -49,7 +49,7 @@ const defaultOptions: Required<Options> = {
 
 const reporter: TextlintRuleReporter<Options> = (context, options = {}) => {
     const maxLength = options.max ?? defaultOptions.max;
-    const skipPatterns = options.skipPatterns ?? options.skipPatterns ?? defaultOptions.skipPatterns;
+    const skipPatterns = options.skipPatterns ?? options.exclusionPatterns ?? defaultOptions.skipPatterns;
     const skipUrlStringLink = options.skipUrlStringLink ?? defaultOptions.skipUrlStringLink;
     const helper = new RuleHelper(context);
     const { Syntax, RuleError, report } = context;

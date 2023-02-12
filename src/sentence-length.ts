@@ -49,7 +49,7 @@ const defaultOptions: Required<Options> = {
 
 const reporter: TextlintRuleReporter<Options> = (context, options = {}) => {
     const maxLength = options.max ?? defaultOptions.max;
-    const skipPatterns = options.skipPatterns ?? options.exclusionPatterns ?? defaultOptions.skipPatterns;
+    const skipPatterns = options.skipPatterns ?? options.skipPatterns ?? defaultOptions.skipPatterns;
     const skipUrlStringLink = options.skipUrlStringLink ?? defaultOptions.skipUrlStringLink;
     const helper = new RuleHelper(context);
     const { Syntax, RuleError, report } = context;
@@ -61,9 +61,13 @@ const reporter: TextlintRuleReporter<Options> = (context, options = {}) => {
         const nodeText = new StringSource(linkNode).toString();
         return node.url === nodeText;
     };
-
     // toPlainText
     return {
+        [Syntax.Document](node) {
+            if (options.exclusionPatterns) {
+                report(node, new RuleError("exclusionPatterns is deprecated. Use skipPatterns instead."));
+            }
+        },
         [Syntax.Paragraph](node) {
             if (helper.isChildNode(node, [Syntax.BlockQuote])) {
                 return;

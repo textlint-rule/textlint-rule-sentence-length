@@ -90,7 +90,7 @@ const reporter: TextlintRuleReporter<Options> = (context, options = {}) => {
                               })
                           }
                         : sentence;
-                    const source = new StringSource(filteredSentence as TxtParentNode);
+                    const source = new StringSource(filteredSentence);
                     const actualText = source.toString();
                     const sentenceText = removeRangeFromString(actualText, skipPatterns);
                     // larger than > 100

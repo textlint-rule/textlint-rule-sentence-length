@@ -110,6 +110,16 @@ tester.run("textlint-rule-sentence-length", rule, {
             text: `JavaScriptをWasmにして実行する仕組みについて。
 QuickJSを使いJavaScriptをByteCodeにしたxxxxを作成し、\`QuickJS.wasm\`と動的にリンクして大部分を共有している。
 Shopify Functionで利用されるが、非同期処理の制限や5ms未満での実行制限がある。`
+        },
+        // https://github.com/textlint-rule/textlint-rule-sentence-length/issues/18
+        {
+            // length: 35
+            // skip "..." -> `He said .`
+            text: `He said "This is a pen. I like it".`,
+            options: {
+                max: 10,
+                skipPatterns: ['/".*"/']
+            }
         }
     ],
     invalid: [

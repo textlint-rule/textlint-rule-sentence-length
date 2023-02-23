@@ -18,7 +18,6 @@ Add "sentence-length" to your `.textlintrc`.
 }
 ```
 
-
 ### Options
 
 - `max`
@@ -54,11 +53,43 @@ Uncount `(...)` from `A sentence(...).`
             "skipPatterns": [
                 "/\\(.*\\)$\\./"
             ]
-
         }
     }
 }
 ```
+
+## A "Sentence"
+
+This rule use [sentence-splitter](https://github.com/textlint-rule/sentence-splitter) as library.
+So the definition of "Sentence" is the same as sentence-splitter.
+
+For example, the following text is 3 sentences.
+
+```
+We are talking about pens.
+He said "This is a pen. I like it".
+I could relate to that statement.
+```
+
+![Example sentences](./sentence.png)
+
+Second line includes `"..."`, but this rule treat second line as a single sentence.
+
+If you want to ignore `"..."`, you can use `skipPatterns` option.
+
+```
+{
+    "rules": {
+        "sentence-length": {
+            "max": 100,
+            "skipPatterns": [
+                "/\".*?\"/"
+            ]
+        }
+    }
+}
+```
+
 
 ## Exception
 

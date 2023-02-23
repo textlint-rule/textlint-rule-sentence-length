@@ -3299,10 +3299,10 @@ sentence-case@^1.1.2:
   dependencies:
     lower-case "^1.1.1"
 
-sentence-splitter@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/sentence-splitter/-/sentence-splitter-4.1.0.tgz#01a8e3e3da9bc2510407ca4c5d64e80b65c6a90b"
-  integrity sha512-qVfKdRwlMUQqGpkqEDx6+NoFp9OmBzi/LjOm1hN2SDzAuD05WBxmb5z4etgv8pVgKqvsquBkf/iv+A0vhq9/Sw==
+sentence-splitter@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/sentence-splitter/-/sentence-splitter-4.2.0.tgz#40a959de0b5b41ee769d9f211ebd99f54248e2a8"
+  integrity sha512-1Ww0iofAbR56tu6lVJ9Yh8Sj5ukeVjikBQ4sR5sNWM0kc+2AJe3p5F2o2qyuf5dJ4KVs1RbJpNkwEiMBCz7pKg==
   dependencies:
     "@textlint/ast-node-types" "^13.2.0"
     structured-source "^4.0.0"

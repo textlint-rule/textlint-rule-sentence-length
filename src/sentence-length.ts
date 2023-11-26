@@ -1,6 +1,7 @@
 import type { TextlintRuleReporter } from "@textlint/types";
-import type { TxtNode, TxtParentNode } from "@textlint/ast-node-types";
-import { splitAST, SentenceSplitterSyntax } from "sentence-splitter";
+import type { TxtParentNode } from "@textlint/ast-node-types";
+import type { TxtParentNodeWithSentenceNodeContent, TxtSentenceNodeChildren } from "sentence-splitter";
+import { SentenceSplitterSyntax, splitAST, TxtSentenceNode } from "sentence-splitter";
 import { StringSource } from "textlint-util-to-string";
 import { RuleHelper } from "textlint-rule-helper";
 import { createRegExp } from "@textlint/regexp-string-matcher";
@@ -47,13 +48,16 @@ const defaultOptions: Required<Options> = {
     exclusionPatterns: []
 };
 
+const isSentenceNode = (node: TxtParentNodeWithSentenceNodeContent): node is TxtSentenceNode => {
+    return node.type === SentenceSplitterSyntax.Sentence;
+};
 const reporter: TextlintRuleReporter<Options> = (context, options = {}) => {
     const maxLength = options.max ?? defaultOptions.max;
     const skipPatterns = options.skipPatterns ?? options.exclusionPatterns ?? defaultOptions.skipPatterns;
     const skipUrlStringLink = options.skipUrlStringLink ?? defaultOptions.skipUrlStringLink;
     const helper = new RuleHelper(context);
     const { Syntax, RuleError, report } = context;
-    const isUrlStringLink = (node: TxtNode | TxtParentNode): boolean => {
+    const isUrlStringLink = (node: TxtSentenceNodeChildren): boolean => {
         if (node.type !== Syntax.Link) {
             return false;
         }
@@ -79,37 +83,35 @@ const reporter: TextlintRuleReporter<Options> = (context, options = {}) => {
             }
             // empty break line == split sentence
             const sentenceRootNode = splitAST(node);
-            sentenceRootNode.children
-                .filter((sentence) => sentence.type === SentenceSplitterSyntax.Sentence)
-                .forEach((sentence) => {
-                    const filteredSentence = skipUrlStringLink
-                        ? {
-                              ...sentence,
-                              children: sentence.children.filter((sentenceChildNode: TxtNode | TxtParentNode) => {
-                                  return !isUrlStringLink(sentenceChildNode);
-                              })
-                          }
-                        : sentence;
-                    const source = new StringSource(filteredSentence);
-                    const actualText = source.toString();
-                    const sentenceText = removeRangeFromString(actualText, skipPatterns);
-                    // larger than > 100
-                    const actualTextLength = actualText.length;
-                    const sentenceLength = sentenceText.length;
-                    if (sentenceLength > maxLength) {
-                        const startLine = filteredSentence.loc.start.line;
-                        report(
-                            // @ts-expect-error: It is compatible with textlint node
-                            filteredSentence,
-                            new RuleError(`Line ${startLine} sentence length(${
-                                sentenceLength !== actualTextLength
-                                    ? `${sentenceLength}, original:${actualTextLength}`
-                                    : sentenceLength
-                            }) exceeds the maximum sentence length of ${maxLength}.
+            sentenceRootNode.children.filter(isSentenceNode).forEach((sentence) => {
+                const filteredSentence = skipUrlStringLink
+                    ? {
+                          ...sentence,
+                          children: sentence.children.filter((sentenceChildNode) => {
+                              return !isUrlStringLink(sentenceChildNode);
+                          })
+                      }
+                    : sentence;
+                const source = new StringSource(filteredSentence);
+                const actualText = source.toString();
+                const sentenceText = removeRangeFromString(actualText, skipPatterns);
+                // larger than > 100
+                const actualTextLength = actualText.length;
+                const sentenceLength = sentenceText.length;
+                if (sentenceLength > maxLength) {
+                    const startLine = filteredSentence.loc.start.line;
+                    report(
+                        // @ts-expect-error: It is compatible with textlint node
+                        filteredSentence,
+                        new RuleError(`Line ${startLine} sentence length(${
+                            sentenceLength !== actualTextLength
+                                ? `${sentenceLength}, original:${actualTextLength}`
+                                : sentenceLength
+                        }) exceeds the maximum sentence length of ${maxLength}.
 Over ${sentenceLength - maxLength} characters.`)
-                        );
-                    }
-                });
+                    );
+                }
+            });
         }
     };
 };

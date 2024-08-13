@@ -58,6 +58,12 @@ const defaultOptions: Required<Options> = {
 const isSentenceNode = (node: TxtParentNodeWithSentenceNodeContent): node is TxtSentenceNode => {
     return node.type === SentenceSplitterSyntax.Sentence;
 };
+
+/**
+ * A count of the number of code units currently in the string.
+ * @param s string
+ */
+const strLenByCodeUnits = (s: string): number => s.length;
 /**
  * A count of the number of codepoint currently in the string.
  *
@@ -75,8 +81,7 @@ const reporter: TextlintRuleReporter<Options> = (context, options = {}) => {
     const maxLength = options.max ?? defaultOptions.max;
     const skipPatterns = options.skipPatterns ?? options.exclusionPatterns ?? defaultOptions.skipPatterns;
     const skipUrlStringLink = options.skipUrlStringLink ?? defaultOptions.skipUrlStringLink;
-    const strLen =
-        options.countBy == null || options.countBy === "code units" ? (s: string) => s.length : strLenByCodePoint;
+    const strLen = options.countBy == null || options.countBy === "codeunits" ? strLenByCodeUnits : strLenByCodePoint;
     const helper = new RuleHelper(context);
     const { Syntax, RuleError, report } = context;
     const isUrlStringLink = (node: TxtSentenceNodeChildren): boolean => {

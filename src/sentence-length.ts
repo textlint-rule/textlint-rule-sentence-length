@@ -70,7 +70,7 @@ const strLenByCodeUnits = (s: string): number => s.length;
  * Complexity: O(n)
  * @param s string
  */
-const strLenByCodePoint = (s: string): number => {
+const strLenByCodePoints = (s: string): number => {
     let i = 0;
     for (const _ of s) {
         ++i;
@@ -81,7 +81,7 @@ const reporter: TextlintRuleReporter<Options> = (context, options = {}) => {
     const maxLength = options.max ?? defaultOptions.max;
     const skipPatterns = options.skipPatterns ?? options.exclusionPatterns ?? defaultOptions.skipPatterns;
     const skipUrlStringLink = options.skipUrlStringLink ?? defaultOptions.skipUrlStringLink;
-    const strLen = options.countBy == null || options.countBy === "codeunits" ? strLenByCodeUnits : strLenByCodePoint;
+    const strLen = options.countBy == null || options.countBy === "codeunits" ? strLenByCodeUnits : strLenByCodePoints;
     const helper = new RuleHelper(context);
     const { Syntax, RuleError, report } = context;
     const isUrlStringLink = (node: TxtSentenceNodeChildren): boolean => {

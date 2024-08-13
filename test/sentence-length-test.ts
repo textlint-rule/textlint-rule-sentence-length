@@ -118,6 +118,13 @@ Shopify Functionで利用されるが、非同期処理の制限や5ms未満で�
                 max: 10,
                 skipPatterns: ['/".*"/']
             }
+        },
+        {
+            text: "𦥑井と臼井",
+            options: {
+                max: 5,
+                countBy: "codepoints"
+            }
         }
     ],
     invalid: [
@@ -248,6 +255,18 @@ Over 18 characters.`
             options: {
                 max: 5,
                 skipUrlStringLink: false
+            }
+        },
+        {
+            text: "𦥑井と臼井",
+            errors: [
+                {
+                    message: `Line 1 sentence length(6) exceeds the maximum sentence length of 5.
+Over 1 characters.`
+                }
+            ],
+            options: {
+                max: 5
             }
         }
     ]

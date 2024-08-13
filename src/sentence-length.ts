@@ -37,6 +37,12 @@ export type Options = {
      * @deprecated use skipPatterns
      */
     exclusionPatterns?: string[];
+    /**
+     * Determine how to count string length.
+     * By default or set to "code units", count string by UTF-16 code unit(= using `String.prototype.length`).
+     * If set to "codepoints", count string by codepoint.
+     */
+    countBy?: "code units" | "codepoints";
 };
 const defaultOptions: Required<Options> = {
     max: 100,
@@ -45,16 +51,32 @@ const defaultOptions: Required<Options> = {
     /**
      * @deprecated
      */
-    exclusionPatterns: []
+    exclusionPatterns: [],
+    countBy: "code units"
 };
 
 const isSentenceNode = (node: TxtParentNodeWithSentenceNodeContent): node is TxtSentenceNode => {
     return node.type === SentenceSplitterSyntax.Sentence;
 };
+/**
+ * A count of the number of codepoint currently in the string.
+ *
+ * Complexity: O(n)
+ * @param s string
+ */
+const strLenByCodePoint = (s: string): number => {
+    let i = 0;
+    for (const _ of s) {
+        ++i;
+    }
+    return i;
+};
 const reporter: TextlintRuleReporter<Options> = (context, options = {}) => {
     const maxLength = options.max ?? defaultOptions.max;
     const skipPatterns = options.skipPatterns ?? options.exclusionPatterns ?? defaultOptions.skipPatterns;
     const skipUrlStringLink = options.skipUrlStringLink ?? defaultOptions.skipUrlStringLink;
+    const strLen =
+        options.countBy == null || options.countBy === "code units" ? (s: string) => s.length : strLenByCodePoint;
     const helper = new RuleHelper(context);
     const { Syntax, RuleError, report } = context;
     const isUrlStringLink = (node: TxtSentenceNodeChildren): boolean => {
@@ -96,8 +118,8 @@ const reporter: TextlintRuleReporter<Options> = (context, options = {}) => {
                 const actualText = source.toString();
                 const sentenceText = removeRangeFromString(actualText, skipPatterns);
                 // larger than > 100
-                const actualTextLength = actualText.length;
-                const sentenceLength = sentenceText.length;
+                const actualTextLength = strLen(actualText);
+                const sentenceLength = strLen(sentenceText);
                 if (sentenceLength > maxLength) {
                     const startLine = filteredSentence.loc.start.line;
                     report(

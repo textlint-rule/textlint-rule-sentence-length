@@ -39,10 +39,10 @@ export type Options = {
     exclusionPatterns?: string[];
     /**
      * Determine how to count string length.
-     * By default or set to "code units", count string by UTF-16 code unit(= using `String.prototype.length`).
+     * By default or set to "codeunits", count string by UTF-16 code unit(= using `String.prototype.length`).
      * If set to "codepoints", count string by codepoint.
      */
-    countBy?: "code units" | "codepoints";
+    countBy?: "codeunits" | "codepoints";
 };
 const defaultOptions: Required<Options> = {
     max: 100,
@@ -52,7 +52,7 @@ const defaultOptions: Required<Options> = {
      * @deprecated
      */
     exclusionPatterns: [],
-    countBy: "code units"
+    countBy: "codeunits"
 };
 
 const isSentenceNode = (node: TxtParentNodeWithSentenceNodeContent): node is TxtSentenceNode => {

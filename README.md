@@ -32,6 +32,10 @@ Add "sentence-length" to your `.textlintrc`.
     - Default: `true`
     - If it is `true`, skip url string link node like `<https:example.com>` or `[https://example.com](https://example.com)`
     - url string link is has the text which is same of url.
+- `countBy`: `"codeunits" | "codepoints"`
+    - Determine how to count string length
+    - Issue: <https://github.com/textlint-rule/textlint-rule-sentence-length/pull/44>
+    - Default `"codeunits"`
 
 ```
 {

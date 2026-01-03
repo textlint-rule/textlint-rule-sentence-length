@@ -33,6 +33,23 @@ const tester = new TextLintTester();
                 {
                     text: "<p>TEST is <a href='https://example.com'>https://example.com</a></p>",
                     ext: ".html"
+                },
+                // https://github.com/textlint-rule/textlint-rule-sentence-length/issues/45
+                // Comment inside <p> should be ignored (length 0)
+                {
+                    text: "<p><!-- this is a very long comment that should be ignored --></p>",
+                    ext: ".html"
+                },
+                {
+                    text: `<p>
+<!--
+comment-->
+</p>`,
+                    ext: ".html"
+                },
+                {
+                    text: "<p>short text<!-- long long long long long long comment --></p>",
+                    ext: ".html"
                 }
             ],
             invalid: [

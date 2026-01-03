@@ -119,7 +119,16 @@ const reporter: TextlintRuleReporter<Options> = (context, options = {}) => {
                           })
                       }
                     : sentence;
-                const source = new StringSource(filteredSentence);
+                const source = new StringSource(filteredSentence, {
+                    // https://github.com/textlint-rule/textlint-rule-sentence-length/issues/45
+                    // Treat Comment nodes as zero-length strings
+                    replacer({ node, emptyValue }) {
+                        if (node.type === "Comment") {
+                            return emptyValue();
+                        }
+                        return;
+                    }
+                });
                 const actualText = source.toString();
                 const sentenceText = removeRangeFromString(actualText, skipPatterns);
                 // larger than > 100
